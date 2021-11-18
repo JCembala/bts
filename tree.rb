@@ -10,10 +10,12 @@ class Tree
     @array = array.uniq.sort
   end
 
+  # Builds tree based on array which class was initialized with
   def build_tree
     @root = array_to_bts
   end
 
+  # Prints tree connected with some pipes
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
