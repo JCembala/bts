@@ -6,13 +6,8 @@ require_relative 'node'
 class Tree
 
   def initialize(array)
-    @root = Node.new
     @array = array.uniq.sort
-  end
-
-  # Builds tree based on array which class was initialized with
-  def build_tree
-    @root = array_to_bts
+    @root = build_tree
   end
 
   # Prints tree connected with some pipes
@@ -24,13 +19,14 @@ class Tree
 
   private
 
-  def array_to_bts(arr = @array, start = 0, stop = @array.length)
-    return nil if start > stop
+  # Builds tree based on array which class was initialized with
+  def build_tree(arr = @array)
+    return nil if arr.empty?
 
-    mid = (start + stop) / 2
+    mid = (arr.size - 1) / 2
     root = Node.new(arr[mid])
-    root.left = array_to_bts(arr, start, mid - 1)
-    root.right = array_to_bts(arr, mid + 1, stop)
+    root.left = build_tree(arr[0...mid])
+    root.right = build_tree(arr[(mid + 1)..-1])
     root
   end
 end
