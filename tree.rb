@@ -17,6 +17,14 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
+  # Inserts a node into tree
+  def insert(node_data, root = @root, left_side: true)
+    return root.left = Node.new(node_data) if root.left.nil? && left_side
+    return root.right = Node.new(node_data) if root.right.nil? && !left_side
+
+    node_data < root.data ? insert(node_data, root.left) : insert(node_data, root.right, left_side: false)
+  end
+
   private
 
   # Builds tree based on array which class was initialized with
