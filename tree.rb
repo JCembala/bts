@@ -20,28 +20,32 @@ class Tree
   # Deletes a node with given value from tree
   def delete(node_data)
     parent = Node.new
+    left = false
     wanted = @root
 
     while wanted.data != node_data
       parent = wanted
-      wanted = wanted.left if node_data < wanted.data
-      wanted = wanted.right if node_data > wanted.data
+      if node_data < wanted.data
+        wanted = wanted.left
+        left = true
+      else
+        wanted = wanted.right
+      end
     end
 
-    # First case when there is no child
-    # 1. Delete node (remove connection from parent to child)
-    return unless wanted.leaf?
+    case wanted.children
+    when :leaf
+      left ? parent.left = nil : parent.right = nil
+    when :left
+      parent.left = wanted.left
+    when :right
+      parent.right = wanted.right
+    when :both
+      # Third case when there is more than one child
+      # 1. Search right subtree for next bigger value than removed
+      # 2. Move found value in the place we are removing
 
-    parent.left = nil if wanted.data < parent.data
-    parent.right = nil if wanted.data > parent.data
-
-    # Second case when there is one child
-    # 1. Find node
-    # 2. Change parent connection from node we are looking to it's child
-    #
-    # Third case when there is more than one child
-    # 1. Search right subtree for next bigger value than removed
-    # 2. Move found value in the place we are removing
+    end
   end
 
   # Inserts a node into tree
