@@ -20,4 +20,19 @@ class Node
 
     false
   end
+
+  # returns symbol which name which child was found
+  # :leaf - when no children
+  # :right - when 1 child on right side is found
+  # :left - when 1 child on left side is found
+  # :both - when 2 children
+  def children
+    return :leaf if leaf?
+
+    return :both unless @right.nil? || @left.nil?
+
+    return :left unless @left.nil?
+
+    :right
+  end
 end
