@@ -59,6 +59,11 @@ class Tree
     node_data < root.data ? insert(node_data, root.left) : insert(node_data, root.right, left_side: false)
   end
 
+  # Return nil or node if it exists in tree
+  def find(node_data)
+    recursive_find(@root, node_data)
+  end
+
   private
 
   # Builds tree based on array which class was initialized with
@@ -76,5 +81,12 @@ class Tree
     return root if root.left.nil?
 
     find_minimal_node(root.left)
+  end
+
+  def recursive_find(root, node_data)
+    return nil if root.nil?
+    return root if root.data == node_data
+
+    node_data < root.data ? recursive_find(root.left, node_data) : recursive_find(root.right, node_data)
   end
 end
