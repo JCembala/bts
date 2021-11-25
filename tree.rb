@@ -41,10 +41,13 @@ class Tree
     when :right
       parent.right = wanted.right
     when :both
-      # Third case when there is more than one child
-      # 1. Search right subtree for next bigger value than removed
-      # 2. Move found value in the place we are removing
-
+      right_subtree = wanted.right
+      minimal_node = find_minimal_node right_subtree
+      # deleting old node which was found minimal in right tree
+      delete(minimal_node.data)
+      # inserting minimal node in place of wanted node
+      minimal_node.left = wanted.left
+      left ? parent.left = minimal_node : parent.right = minimal_node
     end
   end
 
@@ -67,5 +70,11 @@ class Tree
     root.left = build_tree(arr[0...mid])
     root.right = build_tree(arr[(mid + 1)..-1])
     root
+  end
+
+  def find_minimal_node(root)
+    return root if root.left.nil?
+
+    find_minimal_node(root.left)
   end
 end
