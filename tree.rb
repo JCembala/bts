@@ -80,15 +80,33 @@ class Tree
 
   # traverse tree in depth-first order
   # LEFT ROOT RIGHT
-  def inorder; end
+  def inorder(node = @root, &block)
+    return if node.nil?
+
+    inorder(node.left, &block)
+    block.call node
+    inorder(node.right, &block)
+  end
 
   # traverse tree in depth-first order
   # ROOT LEFT RIGHT
-  def preorder; end
+  def preorder(node = @root, &block)
+    return if node.nil?
+
+    block.call node
+    preorder(node.left, &block)
+    preorder(node.right, &block)
+  end
 
   # traverse tree in depth-first order
   # LEFT RIGHT ROOT
-  def postorder; end
+  def postorder(node = @root, &block)
+    return if node.nil?
+
+    postorder(node.left, &block)
+    postorder(node.right, &block)
+    block.call node
+  end
 
   # accepts a node and returns its height
   def height; end
