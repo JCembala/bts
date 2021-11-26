@@ -109,7 +109,12 @@ class Tree
   end
 
   # accepts a node and returns its height
-  def height; end
+  def height(node = @root)
+    return 0 if node == @root
+    return -1 if node.nil?
+
+    [height(node.left), height(node.right)].max + 1
+  end
 
   # accepts a node and returns its depth
   def depth; end
