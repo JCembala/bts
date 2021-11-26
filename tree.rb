@@ -78,6 +78,30 @@ class Tree
     level_order(arr, backup_items, &block)
   end
 
+  # traverse tree in depth-first order
+  # LEFT ROOT RIGHT
+  def inorder; end
+
+  # traverse tree in depth-first order
+  # ROOT LEFT RIGHT
+  def preorder; end
+
+  # traverse tree in depth-first order
+  # LEFT RIGHT ROOT
+  def postorder; end
+
+  # accepts a node and returns its height
+  def height; end
+
+  # accepts a node and returns its depth
+  def depth; end
+
+  # checks if the tree is balanced
+  def balanced?; end
+
+  # rebalances an unbalanced tree
+  def rebalance; end
+
   private
 
   # Builds tree based on array which class was initialized with
