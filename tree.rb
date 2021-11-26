@@ -64,6 +64,17 @@ class Tree
     recursive_find(@root, node_data)
   end
 
+  def level_order(arr = Array.new(1, @root), backup_items = [], &block)
+    return backup_items if arr.empty?
+
+    current_node = arr.shift
+    backup_items << current_node.data
+    block.call current_node if block_given?
+    arr << current_node.left unless current_node.left.nil?
+    arr << current_node.right unless current_node.right.nil?
+    level_order(arr, backup_items, &block)
+  end
+
   private
 
   # Builds tree based on array which class was initialized with
