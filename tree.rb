@@ -60,8 +60,11 @@ class Tree
   end
 
   # Return nil or node if it exists in tree
-  def find(node_data)
-    recursive_find(@root, node_data)
+  def find(node_data, root = @root)
+    return nil if root.nil?
+    return root if root.data == node_data
+
+    node_data < root.data ? find(node_data, root.left) : find(node_data, root.right)
   end
 
   def level_order(arr = Array.new(1, @root), backup_items = [], &block)
@@ -92,12 +95,5 @@ class Tree
     return root if root.left.nil?
 
     find_minimal_node(root.left)
-  end
-
-  def recursive_find(root, node_data)
-    return nil if root.nil?
-    return root if root.data == node_data
-
-    node_data < root.data ? recursive_find(root.left, node_data) : recursive_find(root.right, node_data)
   end
 end
