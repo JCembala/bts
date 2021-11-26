@@ -117,7 +117,17 @@ class Tree
   end
 
   # accepts a node and returns its depth
-  def depth; end
+  def depth(node, parent = @root, node_depth = 0)
+    return 0 if node == @root
+
+    if node < parent
+      depth(node, parent.left, node_depth + 1)
+    elsif node > parent
+      depth(node, parent.right, node_depth + 1)
+    else
+      node_depth
+    end
+  end
 
   # checks if the tree is balanced
   def balanced?; end
