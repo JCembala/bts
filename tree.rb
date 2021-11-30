@@ -142,7 +142,12 @@ class Tree
   end
 
   # rebalances an unbalanced tree
-  def rebalance; end
+  def rebalance
+    nodes = []
+    inorder { |node| nodes << node.data }
+    @array = nodes
+    @root = build_tree
+  end
 
   private
 
