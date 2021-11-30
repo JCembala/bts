@@ -130,7 +130,16 @@ class Tree
   end
 
   # checks if the tree is balanced
-  def balanced?; end
+  def balanced?(node = @root)
+    return true if node.nil?
+
+    left_height = height(node.left)
+    right_height = height(node.right)
+
+    return true if (left_height - right_height).abs <= 1 && balanced?(node.left) && balanced?(node.right)
+
+    false
+  end
 
   # rebalances an unbalanced tree
   def rebalance; end
